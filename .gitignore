@@ -25,3 +25,18 @@ backend/public/uploads/
 # Ignore lock files (optional)
 package-lock.json
 yarn.lock
+
+# Ignore frontend dependencies and build output
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# Optional: Ignore logs or environment files
+frontend/*.log
+frontend/.env
+frontend/.env.local
+
+# Optional: Ignore OS and editor junk
+.DS_Store
+Thumbs.db
+.vscode/
