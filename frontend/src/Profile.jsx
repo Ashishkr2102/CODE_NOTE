@@ -114,23 +114,31 @@ function Profile() {
                   <p style={blogStatusStyle}>
                     Status: <span style={statusBadgeStyle(blog.status)}>{blog.status}</span>
                   </p>
-                  <p style={blogDateStyle}>
-                    Created: {new Date(blog.createdAt).toLocaleDateString()}
+                                  <p style={blogDateStyle}>
+                  Created: {new Date(blog.createdAt).toLocaleDateString()}
+                </p>
+                {blog.content && (
+                  <p style={blogPreviewStyle}>
+                    {blog.content.length > 150 
+                      ? `${blog.content.substring(0, 150)}...` 
+                      : blog.content
+                    }
                   </p>
-                  <div style={blogActionsStyle}>
-                    <button 
-                      onClick={() => navigate(`/edit/${blog._id}`)} 
-                      style={editButtonStyle}
-                    >
-                      Edit
-                    </button>
-                    <button 
-                      onClick={() => navigate(`/blog/${blog._id}`)} 
-                      style={viewButtonStyle}
-                    >
-                      View
-                    </button>
-                  </div>
+                )}
+                <div style={blogActionsStyle}>
+                  <button 
+                    onClick={() => navigate(`/edit/${blog._id}`)} 
+                    style={editButtonStyle}
+                  >
+                    Edit
+                  </button>
+                  <button 
+                    onClick={() => navigate(`/blog/${blog._id}`)} 
+                    style={viewButtonStyle}
+                  >
+                    View
+                  </button>
+                </div>
                 </div>
               </div>
             ))}
@@ -243,6 +251,17 @@ const blogDateStyle = {
   color: "#888",
   fontSize: "0.8rem",
   margin: "0.5rem 0",
+};
+
+const blogPreviewStyle = {
+  color: "#e0e0e0",
+  fontSize: "0.95rem",
+  lineHeight: "1.5",
+  margin: "1rem 0",
+  display: "-webkit-box",
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
 };
 
 const blogActionsStyle = {

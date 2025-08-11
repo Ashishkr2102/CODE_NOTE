@@ -11,6 +11,7 @@ import AdminSignin from "./AdminSignin";
 import AdminDashboard from "./AdminDashboard";
 import AdminSignout from "./AdminSignout";
 import AdminSignup from "./AdminSignup";
+import BlogDetail from "./BlogDetail";
 
 // Protected Route Component
 function ProtectedRoute({ children }) {
@@ -129,6 +130,7 @@ function Content() {
               <Profile />
             </ProtectedRoute>
           } />
+          <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/signout" element={<Signout />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
@@ -246,7 +248,21 @@ function MyBlog() {
                 <p style={blogDateStyle}>
                   Created: {new Date(blog.createdAt).toLocaleDateString()}
                 </p>
+                {blog.content && (
+                  <p style={blogPreviewStyle}>
+                    {blog.content.length > 150 
+                      ? `${blog.content.substring(0, 150)}...` 
+                      : blog.content
+                    }
+                  </p>
+                )}
                 <div style={blogActionsStyle}>
+                  <button 
+                    onClick={() => navigate(`/blog/${blog._id}`)} 
+                    style={viewButtonStyle}
+                  >
+                    View
+                  </button>
                   <button 
                     onClick={() => navigate(`/edit/${blog._id}`)} 
                     style={editButtonStyle}
@@ -388,6 +404,17 @@ const blogDateStyle = {
   margin: "0.5rem 0",
 };
 
+const blogPreviewStyle = {
+  color: "#e0e0e0",
+  fontSize: "0.95rem",
+  lineHeight: "1.5",
+  margin: "1rem 0",
+  display: "-webkit-box",
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
+};
+
 const blogActionsStyle = {
   display: "flex",
   gap: "1rem",
@@ -397,6 +424,15 @@ const blogActionsStyle = {
 const editButtonStyle = {
   padding: "0.5rem 1rem",
   backgroundColor: "#4caf50",
+  color: "white",
+  border: "none",
+  borderRadius: "4px",
+  cursor: "pointer",
+};
+
+const viewButtonStyle = {
+  padding: "0.5rem 1rem",
+  backgroundColor: "#2196f3",
   color: "white",
   border: "none",
   borderRadius: "4px",

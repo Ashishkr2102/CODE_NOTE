@@ -72,6 +72,20 @@ function Home() {
                 <p style={blogDateStyle}>
                   Created: {new Date(blog.createdAt).toLocaleDateString()}
                 </p>
+                {blog.content && (
+                  <p style={blogPreviewStyle}>
+                    {blog.content.length > 150 
+                      ? `${blog.content.substring(0, 150)}...` 
+                      : blog.content
+                    }
+                  </p>
+                )}
+                <button 
+                  onClick={() => navigate(`/blog/${blog._id}`)} 
+                  style={viewButtonStyle}
+                >
+                  Read More
+                </button>
               </div>
             </div>
           ))}
@@ -183,6 +197,29 @@ const blogDateStyle = {
   color: "#888",
   fontSize: "0.8rem",
   margin: "0.5rem 0",
+};
+
+const blogPreviewStyle = {
+  color: "#e0e0e0",
+  fontSize: "0.95rem",
+  lineHeight: "1.5",
+  margin: "1rem 0",
+  display: "-webkit-box",
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
+};
+
+const viewButtonStyle = {
+  padding: "0.75rem 1.5rem",
+  backgroundColor: "#4caf50",
+  color: "white",
+  border: "none",
+  borderRadius: "4px",
+  fontSize: "1rem",
+  cursor: "pointer",
+  marginTop: "1rem",
+  width: "100%",
 };
 
 const loadingStyle = {
