@@ -16,16 +16,14 @@ const corsOptions = {
   credentials: true
 };
 
-
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 
-
-
 // Serve static files from public directory
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+
 
 // Import routers
 const { userRouter } = require("./routes/user");
@@ -33,6 +31,7 @@ const { blogRouter } = require("./routes/blog");
 const { commentsRouter } = require("./routes/comments");
 const { adminRouter } = require("./routes/admin");
 const { likedislikeRouter } = require("./routes/likedislike");
+
 
 // Register routes in order
 userRouter(app);
